@@ -72,3 +72,45 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+// modified from https://blog.marcnuri.com/angular-spring-boot-integration-gradle
+
+val webappDir = "$projectDir/src/main/webapp"
+sourceSets.getByName("main") {
+    java.srcDir("src/main/java")
+    java.srcDir("src/main/kotlin")
+    java.srcDir("$projectDir/src/main/resources")
+    java.srcDir("$webappDir/dist")
+}
+sourceSets.getByName("test") {
+    java.srcDir("src/test/java")
+    java.srcDir("src/test/kotlin")
+}
+
+val processResources by tasks.getting(ProcessResources::class) {
+    dependsOn(":buildAngular")
+}
+
+task<Exec>("installAngular") {
+    workingDir = File(webappDir)
+    inputs.dir(webappDir)
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine = listOf("npm.cmd", "install")
+    } else {
+        commandLine("npm", "install")
+    }
+}
+task<Exec>("buildAngular") {
+    dependsOn(":installAngular")
+    workingDir = File(webappDir)
+    inputs.dir(webappDir)
+    // Add task to the standard build group
+    group = BasePlugin.BUILD_GROUP
+    // ng doesn't exist as a file in windows -> ng.cmd
+    commandLine = if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        listOf("ng.cmd", "build")
+    } else {
+        listOf("ng", "build")
+    }
+}
