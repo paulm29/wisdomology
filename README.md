@@ -71,7 +71,7 @@ Install node (latest is 19.7.0 at time of writing) with:
 Answer:
     N (usage statistics)
     Y routing
-    Sass
+    CSS
 
 ### PowerShell permissions
 
