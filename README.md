@@ -64,7 +64,7 @@ Install node (latest is 19.7.0 at time of writing) with:
 
 ## Angular
 
-    cd frontend
+    cd src/main/webapp
     npm i -g @angular/cli
     ng new webapp
 

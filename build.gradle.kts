@@ -93,6 +93,7 @@ val processResources by tasks.getting(ProcessResources::class) {
 
 task<Exec>("installAngular") {
     workingDir = File(webappDir)
+    workingDir.mkdir()
     inputs.dir(webappDir)
     group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
