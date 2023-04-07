@@ -32,6 +32,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
+    implementation("org.hibernate.validator:hibernate-validator")
+
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -73,25 +75,21 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-// modified from https://blog.marcnuri.com/angular-spring-boot-integration-gradle
-
 val webappDir = "$projectDir/src/main/webapp"
-sourceSets.getByName("main") {
-    java.srcDir("src/main/java")
-    java.srcDir("src/main/kotlin")
-    java.srcDir("$projectDir/src/main/resources")
-    java.srcDir("$webappDir/dist")
-}
-sourceSets.getByName("test") {
-    java.srcDir("src/test/java")
-    java.srcDir("src/test/kotlin")
+
+tasks.create<Delete>("deleteAngularBuild") {
+    delete(
+        fileTree("$webappDir/node_modules"),
+        fileTree("$webappDir/.vs_code")
+    )
 }
 
-val processResources by tasks.getting(ProcessResources::class) {
+tasks.processResources {
     dependsOn(":buildAngular")
 }
 
 task<Exec>("installAngular") {
+//    dependsOn(":deleteAngularBuild")
     workingDir = File(webappDir)
     workingDir.mkdir()
     inputs.dir(webappDir)
