@@ -1,3 +1,4 @@
+Quote organisation tool with advanced features.
 
 # Assumptions
 * Windows
@@ -51,10 +52,10 @@ Check with:
 
 # Frontend
 
-I hate having to switch IntelliJ windows. 
+I hate having to switch IntelliJ windows for frontend and backend, so source for both are in one project.
 
-We may create a Gradle multi-module project later (like this [https://blogs.perficient.com/2021/08/30/angular-and-spring-boot-as-a-single-application/]), but for now, let's maintain just Gradle build file
-Based on [https://blog.marcnuri.com/angular-spring-boot-integration-gradle]
+We may create a Gradle multi-module project later 
+(like this [https://blogs.perficient.com/2021/08/30/angular-and-spring-boot-as-a-single-application/]), but for now, let's maintain just Gradle build file
 
 ## NVM and Node
 
