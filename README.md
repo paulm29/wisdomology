@@ -100,6 +100,15 @@ Project
 Kotlin
 * Add unambigious imports on the fly
 * Organise imports on the fly
+* Import: use single name import
 
 Terminal: 
 * Powershell
+
+# Postgres
+
+docker pull postgres
+
+docker run -itd -e POSTGRES_USER=wisdomology -e POSTGRES_PASSWORD=wisdomology -p 5432:5432 -v /data:/wisdomology_data --name postgresql postgres
+
+use wisdomology/wisdomology to connect

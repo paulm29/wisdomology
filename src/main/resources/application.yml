@@ -1,3 +1,36 @@
 spring:
+  main:
+    banner-mode: "off"
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: wisdomology
+    password: wisdomology
+    hikari:
+      data-source-properties:
+        socketTimeout: 120
+        tcpKeepAlive: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      # Prevent spurious exception java.sql.SQLFeatureNotSupportedException:
+      # Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+      #
+      # References:
+      #
+      # [1] https://github.com/pgjdbc/pgjdbc/issues/1102
+      # [2] https://hibernate.atlassian.net/browse/HHH-12368
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.jdbc.time_zone: UTC
+      hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 400
+      javax.persistence.query.timeout: 10000
+      javax.persistence.lock.timeout: 10000
+    open-in-view: false
   liquibase:
     changeLog: classpath:/db/changelog/db.changelog-master.xml
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    enabled: false
