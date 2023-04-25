@@ -53,6 +53,8 @@ Check with:
 # Frontend
 
 I hate having to switch IntelliJ windows for frontend and backend, so source for both are in one project.
+You can organise IntelliJ with separate modules for frontend/backend in same project, which has the advantage of live frontend updates,
+but I prefer just to run everything again when I make a change, either frontend or backend.
 
 We may create a Gradle multi-module project later 
 (like this [https://blogs.perficient.com/2021/08/30/angular-and-spring-boot-as-a-single-application/]), but for now, let's maintain just Gradle build file
@@ -112,3 +114,11 @@ docker pull postgres
 docker run -itd -e POSTGRES_USER=wisdomology -e POSTGRES_PASSWORD=wisdomology -p 5432:5432 -v /data:/wisdomology_data --name postgresql postgres
 
 use wisdomology/wisdomology to connect
+
+# Angular material
+
+add library, https://material.angular.io/guide/getting-started
+
+# Running
+
+http://localhost:8080/
