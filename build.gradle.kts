@@ -12,8 +12,6 @@ group = "au.com.paulrobotham"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-val axonVersion = "4.6.0"
-
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
@@ -46,9 +44,6 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-    implementation("org.axonframework:axon-spring-boot-starter")
-    implementation("org.axonframework.extensions.kotlin:axon-kotlin")
-    implementation("org.axonframework.extensions.reactor:axon-reactor-spring-boot-starter")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
 
@@ -56,13 +51,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.graphql:spring-graphql-test")
-    testImplementation("org.axonframework:axon-test")
-}
-
-dependencyManagement {
-    imports {
-        mavenBom("org.axonframework:axon-bom:${axonVersion}")
-    }
 }
 
 tasks.withType<KotlinCompile> {

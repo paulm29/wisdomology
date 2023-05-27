@@ -35,21 +35,6 @@ And overwrite *src* folder
 Note: you could have skipped step 1, and overwriting in this step, if you just imported Spring Initialzr folder. 
 We just did this for learning purposes.
 
-# Axon Initialzr dependencies
-
-Add to build.gradle.kts:
-    [https://start.axoniq.io?groupId=au.com.paulrobotham&artifactId=wisdomology&baseDir=wisdomology&name=wisdomology&description=wisdomology&packageName=au.com.paulrobotham&type=gradle-project&language=java&javaVersion=11&packaging=jar&usingAxonServer=SE&axonServerContext=&dependencies=axon-starter%2Caxon-test%2Caxon-kotlin%2Caxon-reactor-starter%2Cweb%2Cdata-jpa%2Ch2%2Cpostgresql]
-
-# Set up Axon server
-
-Run with:
-
-    docker run -d --name axonserver -p 8024:8024 -p 8124:8124 axoniq/axonserver
-
-Check with:
-
-    curl -s http://localhost:8024/actuator/info
-
 # Frontend
 
 I hate having to switch IntelliJ windows for frontend and backend, so source for both are in one project.
