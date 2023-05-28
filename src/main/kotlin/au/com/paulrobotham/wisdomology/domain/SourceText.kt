@@ -1,17 +1,11 @@
 package au.com.paulrobotham.wisdomology.domain
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
-import jakarta.persistence.OneToOne
-import jakarta.persistence.PrimaryKeyJoinColumn
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.*
 
-@Entity
 @Table(schema = "wisdomology", name = "source_text")
-data class SourceText(
+@Entity
+class SourceText(
     @Id
     val id: UUID,
 
@@ -23,8 +17,9 @@ data class SourceText(
     val title: String,
 
     @OneToOne
+    @PrimaryKeyJoinColumn(name = "translation_id")
     var translation: Translation?,
 
-    @OneToMany
-    var sourceLinks: List<SourceLink> = listOf()
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "sourceTextId", fetch = FetchType.EAGER, orphanRemoval = true)
+    var sourceLinks: MutableList<SourceLink> = mutableListOf()
 )

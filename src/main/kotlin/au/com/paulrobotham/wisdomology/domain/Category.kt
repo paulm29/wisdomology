@@ -6,15 +6,15 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.util.UUID
 
-@Table(schema = "wisdomology", name = "quote_comment")
+@Table(schema = "wisdomology", name = "category")
 @Entity
-class QuoteComment(
+class Category(
     @Id
     val id: UUID,
 
     @Column(name = "quote_id", nullable = false)
     val quoteId: UUID,
 
-    @Column(name = "comment", nullable = false)
-    val comment: String,
+    @Column(name = "category", nullable = false)
+    val category: String,
 )

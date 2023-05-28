@@ -4,8 +4,8 @@ plugins {
     id("org.springframework.boot") version "3.0.3"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.8.20"
-//    kotlin("plugin.allopen") version "1.8.20"
+    kotlin("plugin.spring") version "1.8.21" // include all-open
+    kotlin("plugin.jpa") version "1.8.21" // include no-arg
 }
 
 group = "au.com.paulrobotham"
@@ -31,26 +31,33 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
-    implementation("org.hibernate.validator:hibernate-validator")
-
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-noarg")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     // database
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
+    implementation("org.hibernate.validator:hibernate-validator")
 
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.graphql:spring-graphql-test")
+}
+
+allOpen {
+    annotations("jakarta.persistence.Entity", "jakarta.persistence.MappedSuperclass", "jakarta.persistence.Embedabble")
+}
+
+noArg {
+    annotations("jakarta.persistence.Entity", "jakarta.persistence.MappedSuperclass", "jakarta.persistence.Embedabble")
 }
 
 tasks.withType<KotlinCompile> {
@@ -63,6 +70,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+// Angular
 
 val webappDir = "$projectDir/src/main/webapp"
 

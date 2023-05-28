@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    <changeSet id="1" author="PR">
+    <changeSet id="init" author="PR">
         <sql>create schema wisdomology</sql>
 
         <createTable schemaName="wisdomology" tableName="author">
@@ -12,7 +12,20 @@
                              primaryKeyName="pk_author"
                 />
             </column>
-            <column name="name" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR"/>
+            <column name="last_name" type="VARCHAR"/>
+        </createTable>
+
+        <createTable schemaName="wisdomology" tableName="category">
+            <column name="id" type="uuid">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pk_category"
+                />
+            </column>
+            <column name="category" type="VARCHAR"/>
+
+            <column name="quote_id" type="uuid"/> <!-- TODO FK -->
         </createTable>
 
         <createTable schemaName="wisdomology" tableName="quote">
@@ -22,7 +35,8 @@
                              primaryKeyName="pk_quote"
                 />
             </column>
-            <column name="quote" type="VARCHAR(255)"/>
+            <column name="quote" type="VARCHAR"/>
+
             <column name="source_text_id" type="uuid"/>
         </createTable>
 
@@ -33,7 +47,9 @@
                              primaryKeyName="pk_quote_comment"
                 />
             </column>
-            <column name="comment" type="VARCHAR(255)"/>
+            <column name="comment" type="VARCHAR"/>
+
+            <column name="quote_id" type="uuid"/> <!-- TODO FK -->
         </createTable>
 
         <createTable schemaName="wisdomology" tableName="source_link">
@@ -43,7 +59,9 @@
                              primaryKeyName="pk_source_link"
                 />
             </column>
-            <column name="url" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR"/>
+
+            <column name="source_text_id" type="uuid"/>
         </createTable>
 
         <createTable schemaName="wisdomology" tableName="source_text">
@@ -54,7 +72,9 @@
                 />
             </column>
             <column name="author_id" type="uuid"/>
-            <column name="title" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR"/>
+
+            <column name="translation_id" type="uuid"/>
         </createTable>
 
         <createTable schemaName="wisdomology" tableName="translation">
@@ -64,8 +84,17 @@
                              primaryKeyName="pk_translation"
                 />
             </column>
-            <column name="translator" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR"/>
+            <column name="last_name" type="VARCHAR"/>
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_source_link__source_text"
+                                 baseTableSchemaName="wisdomology"
+                                 baseTableName="source_link"
+                                 baseColumnNames="source_text_id"
+                                 referencedTableSchemaName="wisdomology"
+                                 referencedTableName="source_text"
+                                 referencedColumnNames="id" />
 
     </changeSet>
 </databaseChangeLog>

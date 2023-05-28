@@ -6,12 +6,15 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.util.*
 
-@Entity
 @Table(schema = "wisdomology", name = "author")
-data class Author (
+@Entity
+class Author (
     @Id
     val id: UUID,
 
-    @Column(name = "name", nullable = false)
-    var name: String? = null
+    @Column(name = "first_name")
+    var firstName: String?,
+
+    @Column(name = "last_name", nullable = false)
+    var lastName: String,
 )
