@@ -1,5 +1,7 @@
 Quote organisation tool with advanced features.
 
+Review entities to get acquainted with the structure: [Entities](Entities.md)
+
 # Assumptions
 * Windows
 * Powershell
