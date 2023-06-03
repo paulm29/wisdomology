@@ -1,1 +1,9 @@
-<p>quote works!</p>
+<div *ngFor="let quote of quotes">
+
+  <div>
+    <a [title]="'Detail'" [routerLink]="['/quote', quote.id]">
+      {{ quote.quote }}
+    </a>
+  </div>
+
+</div>

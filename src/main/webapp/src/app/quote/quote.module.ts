@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuoteViewComponent } from './quote-view/quote-view.component';
 import { QuoteEditComponent } from './quote-edit/quote-edit.component';
 import { QuoteComponent } from './quote.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { QuoteComponent } from './quote.component';
     QuoteComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class QuoteModule { }

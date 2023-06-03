@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,27 +12,49 @@ import { StoreModule } from '@ngrx/store';
 import { appEffects } from './common/store/effects/app.effects';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AuthInterceptor } from './auth.interceptor';
-import { QuoteComponent } from './quote/quote.component';
-import { QuoteViewComponent } from './quote/quote-view/quote-view.component';
-import { QuoteEditComponent } from './quote/quote-edit/quote-edit.component';
 import { QuoteModule } from './quote/quote.module';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu'
+import { metaReducers, reducers } from './common/store/reducers/app.reducer';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
+    DashboardComponent,
+    NavigationComponent,
     AppComponent,
     HighlightDirective
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
+    RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    // StoreModule.forRoot(appReducer, {metaReducers: metaReducers}),
-    StoreModule.forRoot(),
+    StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot(appEffects),
-    QuoteModule
+    QuoteModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    // isDevMode() ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
     {
@@ -41,9 +63,12 @@ import { QuoteModule } from './quote/quote.module';
       multi: true
     },
     {
-    provide: MAT_DATE_LOCALE,
-    useValue: 'en-AU'
-  }],
+      provide: MAT_DATE_LOCALE,
+      useValue: 'en-AU'
+    }],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuoteService } from '../quote.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quote-view',
@@ -7,6 +7,6 @@ import { QuoteService } from '../quote.service';
   styleUrls: ['./quote-view.component.css']
 })
 export class QuoteViewComponent {
-  constructor(private quoteService: QuoteService) {
+  constructor(private route: ActivatedRoute) {
   }
 }

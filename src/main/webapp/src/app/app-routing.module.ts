@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuoteModule } from './quote/quote.module';
 import { QuoteViewComponent } from './quote/quote-view/quote-view.component';
 import { QuoteEditComponent } from './quote/quote-edit/quote-edit.component';
+import { QuoteComponent } from './quote/quote.component';
+import { QuoteAddComponent } from './quote/quote-add/quote-add.component';
 
 const routes: Routes = [
-  { path: 'view', component: QuoteViewComponent },
-  { path: 'edit', component: QuoteEditComponent }
+  { path: '', component: QuoteComponent },
+  { path: 'quotes/:quoteId', component: QuoteViewComponent },
+  { path: 'quotes/:quoteId/edit', component: QuoteEditComponent },
+  { path: 'quotes/add', component: QuoteAddComponent }
 ];
 
 @NgModule({

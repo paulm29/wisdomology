@@ -2,6 +2,7 @@ import { Action, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/stor
 import { reducer as configReducer } from './config.reducer';
 import { resetStore } from '../actions/app.actions';
 import { AppState } from '../states/app.state';
+import { isDevMode } from '@angular/core';
 
 
 export function resetAllStates(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -15,8 +16,19 @@ export function resetAllStates(reducer: ActionReducer<any>): ActionReducer<any> 
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = [resetAllStates]
+// export const metaReducers: MetaReducer<any>[] = [resetAllStates]
 
 // export const appReducer: ActionReducerMap<AppState, Action>  = {
 //   config: configReducer
 // };
+
+export interface State {
+
+}
+
+export const reducers: ActionReducerMap<State> = {
+
+};
+
+
+export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

@@ -1,4 +1,4 @@
-# Assumptions
+# Requirements
 * Windows
 * Powershell
 * Dockerhub
@@ -65,6 +65,34 @@ Y routing
 CSS
 ```
 
+Set up environments
+```
+ng generate environments
+```
+
+## ngrx
+
+See https://ngrx.io/guide/store/install and https://v7.ngrx.io/guide/schematics
+```
+npm install @ngrx/{store,effects,entity,store-devtools} --save
+ng generate @ngrx/schematics:store State --root --module app.module.ts
+ng generate @ngrx/schematics:effect App --root --module app.module.ts
+```
+
+Also:
+```
+npm install @ngrx/router-store --save
+```
+
+## Angular material
+
+add library, https://material.angular.io/guide/getting-started
+Also create dashboard and navigation, put dashboard within navigation:
+```
+ng generate @angular/material:navigation navigation
+ng generate @angular/material:dashboard dashboard
+```
+
 ### PowerShell permissions
 
 If you get the following error:
@@ -109,10 +137,6 @@ docker pull postgres
 docker run -itd -e POSTGRES_USER=wisdomology -e POSTGRES_PASSWORD=wisdomology -p 5432:5432 -v /data:/wisdomology_data --name wisdomology postgres
 ```
 use wisdomology/wisdomology to connect
-
-# Angular material
-
-add library, https://material.angular.io/guide/getting-started
 
 # Running
 
