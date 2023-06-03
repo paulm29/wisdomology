@@ -1,8 +1,12 @@
 import { ConfigState } from './config.state';
 
 export interface AppState {
-  config?: ConfigState;
+  config: ConfigState;
 }
 
-export const initialAppState = {
+export const initialAppState: AppState = {
+  config: {
+    error: null,
+    data: null
+  }
 };

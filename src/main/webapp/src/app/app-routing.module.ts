@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuoteViewComponent } from './quote-view/quote-view.component';
-import { QuoteEditComponent } from './quote-edit/quote-edit.component';
+import { QuoteModule } from './quote/quote.module';
+import { QuoteViewComponent } from './quote/quote-view/quote-view.component';
+import { QuoteEditComponent } from './quote/quote-edit/quote-edit.component';
 
 const routes: Routes = [
   { path: 'view', component: QuoteViewComponent },
@@ -9,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), QuoteModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

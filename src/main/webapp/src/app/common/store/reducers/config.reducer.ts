@@ -1,8 +1,8 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { ConfigState, initialConfigState } from '../states/config.state';
 import { loadConfigurationFailure, loadConfigurationSuccess } from '../actions/config.actions';
 
-export const configReducer = createReducer(
+export const configReducer: ActionReducer<ConfigState, Action> = createReducer(
   initialConfigState,
   on(loadConfigurationSuccess, (state, payload) => ({
     ...state,
@@ -16,6 +16,6 @@ export const configReducer = createReducer(
   }))
 );
 
-export function reducer(state: ConfigState, action: Action) {
+export function reducer(state: ConfigState, action: Action) : ConfigState {
   return configReducer(state, action);
 }

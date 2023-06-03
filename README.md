@@ -5,8 +5,13 @@
 
 # Running
 
+## Backend
 
-# Frontend
+```
+docker run -itd -e POSTGRES_USER=wisdomology -e POSTGRES_PASSWORD=wisdomology -p 5432:5432 -v /data:/wisdomology_data --name wisdomology postgres
+```
+
+## Frontend
 
 ```
 cd src/main/webapp
@@ -14,7 +19,7 @@ ng service
 ```
 open http://localhost:4200
 
-# Create new elements
+### Create new elements
 
 ```
 ng generate module myModule

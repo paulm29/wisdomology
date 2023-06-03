@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuoteService } from '../common/service/quote.service';
+import { QuoteService } from '../quote.service';
 
 @Component({
   selector: 'app-quote-view',
