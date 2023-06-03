@@ -1,4 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import cz.habarta.typescript.generator.JsonLibrary
+import cz.habarta.typescript.generator.TypeScriptFileType
+import cz.habarta.typescript.generator.TypeScriptOutputKind
+import org.jetbrains.kotlin.builtins.StandardNames.FqNames.mutableList
 
 plugins {
     id("org.springframework.boot") version "3.0.3"
@@ -6,6 +10,7 @@ plugins {
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.8.21" // include all-open
     kotlin("plugin.jpa") version "1.8.21" // include no-arg
+    id("cz.habarta.typescript-generator") version "3.2.1263"
 }
 
 group = "au.com.paulrobotham"
@@ -70,6 +75,28 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks {
+    generateTypeScript {
+        classes = mutableListOf(
+            "au.com.paulrobotham.wisdomology.domain.Author",
+            "au.com.paulrobotham.wisdomology.domain.Category",
+            "au.com.paulrobotham.wisdomology.domain.Quote",
+            "au.com.paulrobotham.wisdomology.domain.QuoteComment",
+            "au.com.paulrobotham.wisdomology.domain.SourceLink",
+            "au.com.paulrobotham.wisdomology.domain.SourceText",
+            "au.com.paulrobotham.wisdomology.domain.Translation"
+        )
+        jsonLibrary = JsonLibrary.jackson2
+        outputKind = TypeScriptOutputKind.module
+        outputFileType = TypeScriptFileType.implementationFile
+    }
+}
+
+// called ondemand instead:
+// gradle generateTypeScript
+// output to C:\wisdomology\build\typescript-generator\wisdomology.ts
+//build.dependsOn generateTypeScript
 
 // Angular
 

@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ConfigService} from "./config.service";
+import { Component, OnInit } from '@angular/core';
+import { ConfigService } from './common/service/config.service';
+import { Store } from '@ngrx/store';
+import { loadConfiguration } from './common/store/actions/config.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,10 @@ import {ConfigService} from "./config.service";
 export class AppComponent implements OnInit {
   title = 'webapp';
 
-  constructor(private configService: ConfigService) {}
+  constructor(private store: Store, private configService: ConfigService) {}
 
   ngOnInit() {
+    this.store.dispatch(loadConfiguration())
     this.showConfig()
   }
 
