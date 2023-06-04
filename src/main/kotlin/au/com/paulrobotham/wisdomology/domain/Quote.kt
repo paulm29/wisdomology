@@ -16,7 +16,7 @@ import java.util.*
 @Entity
 class Quote(
     @Id
-    val id: UUID,
+    var id: UUID,
 
     @Column(name = "quote", nullable = false)
     val quote: String,
