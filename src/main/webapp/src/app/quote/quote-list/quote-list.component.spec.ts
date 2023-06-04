@@ -5,6 +5,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { QuoteListComponent } from './quote-list.component';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('QuoteListComponent', () => {
   let component: QuoteListComponent;
@@ -18,7 +19,8 @@ describe('QuoteListComponent', () => {
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
-      ]
+      ],
+      providers: [provideMockStore({})]
     }).compileComponents();
   }));
 

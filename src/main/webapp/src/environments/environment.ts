@@ -1,3 +1,5 @@
 export const environment = {
-  production: false
+  production: false,
+  title: "Wisdomology",
+  baseUrl: "http://localhost:8080"
 };

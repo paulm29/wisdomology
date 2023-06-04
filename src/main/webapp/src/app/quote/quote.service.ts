@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Quote } from '../common/model/wisdomology';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteService {
-  url: string = "/quote";
+  url: string = environment.baseUrl + "/quote";
 
   constructor(private http: HttpClient) { }
 

@@ -2,7 +2,7 @@ import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { ConfigState, initialConfigState } from '../states/config.state';
 import { loadConfigurationFailure, loadConfigurationSuccess } from '../actions/config.actions';
 
-export const configReducer: ActionReducer<ConfigState, Action> = createReducer(
+export const configReducer: ActionReducer<ConfigState> = createReducer(
   initialConfigState,
   on(loadConfigurationSuccess, (state, payload) => ({
     ...state,
@@ -16,6 +16,6 @@ export const configReducer: ActionReducer<ConfigState, Action> = createReducer(
   }))
 );
 
-export function reducer(state: ConfigState, action: Action) : ConfigState {
+export function reducer(state: ConfigState, action: Action): ConfigState {
   return configReducer(state, action);
 }

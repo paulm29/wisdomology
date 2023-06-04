@@ -8,7 +8,9 @@ import {
   getQuotesSuccess
 } from './quote.actions';
 
-export const quoteReducer: ActionReducer<QuoteState> = createReducer(
+export const quoteFeature = "quote";
+
+export const quoteReducers: ActionReducer<QuoteState> = createReducer(
   initialQuoteState,
   on(getQuotesSuccess, (state, action) => ({
     ...state,
@@ -34,5 +36,5 @@ export const quoteReducer: ActionReducer<QuoteState> = createReducer(
 );
 
 export function reducer(state: QuoteState, action: Action): QuoteState {
-  return quoteReducer(state, action);
+  return quoteReducers(state, action);
 }

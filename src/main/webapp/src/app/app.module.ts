@@ -22,7 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu'
-import { metaReducers, reducers } from './common/store/reducers/app.reducer';
+import { metaReducers, appReducers } from './common/store/reducers/app.reducer';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './common/interceptor/auth.interceptor';
@@ -43,7 +43,7 @@ import { AuthInterceptor } from './common/interceptor/auth.interceptor';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(appEffects),
     MatToolbarModule,
     MatButtonModule,

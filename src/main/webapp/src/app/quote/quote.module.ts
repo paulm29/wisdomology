@@ -16,6 +16,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { StoreModule } from '@ngrx/store';
+import { quoteFeature, quoteReducers } from './store/quote.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { quoteEffects } from './store/quote.effects';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    StoreModule.forFeature(quoteFeature, quoteReducers),
+    EffectsModule.forFeature(quoteEffects)
   ],
   exports: [
     QuoteListComponent

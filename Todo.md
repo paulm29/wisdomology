@@ -4,3 +4,4 @@
 * Web socket
 * Error pages and error interceptor
 * Proper auth interceptor
+* test coverage

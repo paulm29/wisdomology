@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from './common/service/config.service';
 import { Store } from '@ngrx/store';
 import { loadConfiguration } from './common/store/actions/config.actions';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { loadConfiguration } from './common/store/actions/config.actions';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'webapp';
+  title = environment.title;
 
   constructor(private store: Store, private configService: ConfigService) {}
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     this.showConfig()
   }
 
+  // TODO replace with selector
   showConfig() {
     this.configService.getConfig()
       .subscribe((message: string) => {
