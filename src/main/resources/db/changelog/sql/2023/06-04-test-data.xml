@@ -4,16 +4,23 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
     <changeSet id="test-data" author="PR">
 
-        <insert schemaName="wisdomology" tableName="quote">
-            <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
-            <column name="quote" value="Be Happy!" />
-            <column name="source_text_id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
-        </insert>
-
         <insert schemaName="wisdomology" tableName="author">
             <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
             <column name="first_name" value="Bob"/>
             <column name="last_name" value="Smith"/>
+        </insert>
+
+        <insert schemaName="wisdomology" tableName="source_text">
+            <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
+            <column name="author_id" value="9d5ca634-02ac-11ee-be56-0242ac120002"/>
+            <column name="title" value="The book"/>
+            <column name="translation_id" value="9d5ca634-02ac-11ee-be56-0242ac120002"/>
+        </insert>
+
+        <insert schemaName="wisdomology" tableName="quote">
+            <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
+            <column name="quote" value="Be Happy!" />
+            <column name="source_text_id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
         </insert>
 
         <insert schemaName="wisdomology" tableName="category">
@@ -32,13 +39,6 @@
             <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
             <column name="url" value="http://example.com"/>
             <column name="source_text_id" value="9d5ca634-02ac-11ee-be56-0242ac120002"/>
-        </insert>
-
-        <insert schemaName="wisdomology" tableName="source_text">
-            <column name="id" value="9d5ca634-02ac-11ee-be56-0242ac120002" />
-            <column name="author_id" value="9d5ca634-02ac-11ee-be56-0242ac120002"/>
-            <column name="title" value="The book"/>
-            <column name="translation_id" value="9d5ca634-02ac-11ee-be56-0242ac120002"/>
         </insert>
 
         <insert schemaName="wisdomology" tableName="translation">

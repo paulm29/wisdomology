@@ -3,7 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
     <changeSet id="init" author="PR">
-        <sql>create schema wisdomology</sql>
+        <sql>create schema if not exists wisdomology</sql>
 
         <createTable schemaName="wisdomology" tableName="author">
             <column name="id" type="uuid">
