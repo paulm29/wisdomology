@@ -2,6 +2,7 @@
 
 1. [Setup](Setup.md)
 2. Review entities to get acquainted with the structure: [Entities](Entities.md)
+2. [Todo](Todo.md)
 
 # Running
 
