@@ -1,17 +1,29 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { MockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
+  // let actions$: Observable<Action>;
+  // let effects: UsiEffect;
+  let mockStore: MockStore;
+  // const mockApplicantService = createMock(ApplicantService);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
+      providers: [
+        // { provide: ApplicantService, useValue: mockApplicantService },
+      ],
       declarations: [
         AppComponent
       ],
     }).compileComponents();
+    // effects = TestBed.get(UsiEffect);
+    // actions$ = TestBed.get(Actions);
+    mockStore = TestBed.get(MockStore);
   });
 
   it('should create the app', () => {
