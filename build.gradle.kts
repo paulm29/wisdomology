@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import cz.habarta.typescript.generator.JsonLibrary
 import cz.habarta.typescript.generator.TypeScriptFileType
 import cz.habarta.typescript.generator.TypeScriptOutputKind
-import org.jetbrains.kotlin.builtins.StandardNames.FqNames.mutableList
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "3.0.3"
@@ -30,10 +29,12 @@ repositories {
 dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
+    // spring
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
     // kotlin
@@ -46,13 +47,13 @@ dependencies {
 
     // database
     implementation("org.liquibase:liquibase-core")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.hibernate.validator:hibernate-validator")
 
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.mockito:mockito-core")
     testImplementation("com.willowtreeapps.assertk:assertk:0.26.1")
