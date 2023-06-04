@@ -54,6 +54,11 @@ dependencies {
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.willowtreeapps.assertk:assertk:0.26.1")
+    implementation("io.mockk:mockk:1.13.5")
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
+    testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
     testImplementation("org.springframework.graphql:spring-graphql-test")
 }
 
