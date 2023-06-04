@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { appEffects } from './common/store/effects/app.effects';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { AuthInterceptor } from './auth.interceptor';
 import { QuoteModule } from './quote/quote.module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { metaReducers, reducers } from './common/store/reducers/app.reducer';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthInterceptor } from './common/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot(appEffects),
-    QuoteModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -54,7 +53,8 @@ import { CommonModule } from '@angular/common';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    // isDevMode() ? StoreDevtoolsModule.instrument() : []
+    QuoteModule
+    // isDevMode() ? StoreDevtoolsModule.instrument() : [] // FIXME
   ],
   providers: [
     {

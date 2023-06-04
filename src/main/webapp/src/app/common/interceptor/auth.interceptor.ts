@@ -1,11 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { catchError, map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 // import * as Url from 'url-parse';
 import { Store } from '@ngrx/store';
-import { ConfigService } from './common/service/config.service';
+import { ConfigService } from '../service/config.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,25 +16,26 @@ export class AuthInterceptor implements HttpInterceptor {
     // private identityService: IdentityService,
     private store: Store,
     private configService: ConfigService
-  ) {}
+  ) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request.clone());
-  //   // return Observable.of
-  //   // return request;
-  //   // return this.injectAuthHeaderInRequest(request)
-  //   //   .pipe(switchMap(r => next.handle(r)))
-  //   //   .pipe(
-  //   //     catchError(event => {
-  //   //       if (event instanceof HttpErrorResponse && event.status === 403) {
-  //   //         // if (this.identityService.isTokenExpired()) {
-  //   //         //   return this.refreshAndRetry(request, next);
-  //   //         // }
-  //   //         this.signoutAndNavigateToSignin();
-  //   //       }
-  //   //       return throwError(event);
-  //   //     })
-  //   //   );
+    //   // return Observable.of
+    //   // return request;
+    //   // return this.injectAuthHeaderInRequest(request)
+    //   //   .pipe(switchMap(r => next.handle(r)))
+    //   //   .pipe(
+    //   //     catchError(event => {
+    //   //       if (event instanceof HttpErrorResponse && event.status === 403) {
+    //   //         // if (this.identityService.isTokenExpired()) {
+    //   //         //   return this.refreshAndRetry(request, next);
+    //   //         // }
+    //   //         this.signoutAndNavigateToSignin();
+    //   //       }
+    //   //       return throwError(event);
+    //   //     })
+    //   //   );
   }
 
   // injectAuthHeaderInRequest(request: HttpRequest<any>): Observable<HttpRequest<any>> {
@@ -71,7 +71,7 @@ export class AuthInterceptor implements HttpInterceptor {
   // }
 
   private addToken(request: HttpRequest<any>, authToken: string) {
-    return request.clone({ setHeaders: { Authorization: `Bearer ${authToken}` } });
+    return request.clone({setHeaders: {Authorization: `Bearer ${authToken}`}});
   }
 
   private signoutAndNavigateToSignin() {
