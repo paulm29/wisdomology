@@ -1,1 +1,58 @@
-<p>quote-add-component works!</p>
+<form [formGroup]="quoteForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="quote-add">
+    <mat-card-header>
+      <mat-card-title>Add quote</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Quote" formControlName="quote"></textarea>
+            <mat-error *ngIf="quoteForm.controls['quote'].hasError('required')">
+              Quote is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Category" formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+<!--      <div class="row">-->
+<!--        <div class="col">-->
+<!--          <mat-form-field class="full-width">-->
+<!--            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">-->
+<!--            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col">-->
+<!--          <mat-radio-group formControlName="shipping">-->
+<!--            <mat-radio-button value="free">Free Shipping</mat-radio-button>-->
+<!--            <mat-radio-button value="priority">Priority Shipping</mat-radio-button>-->
+<!--            <mat-radio-button value="nextday">Next Day Shipping</mat-radio-button>-->
+<!--          </mat-radio-group>-->
+<!--        </div>-->
+<!--      </div>-->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

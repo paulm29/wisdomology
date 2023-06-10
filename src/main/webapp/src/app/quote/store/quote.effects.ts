@@ -2,20 +2,40 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { QuoteService } from '../quote.service';
-import { getQuotes, getQuotesFailure, getQuotesSuccess } from './quote.actions';
+import {
+  getCategories,
+  getCategoriesFailure,
+  getCategoriesSuccess,
+  getQuotes,
+  getQuotesFailure,
+  getQuotesSuccess
+} from './quote.actions';
+import { CategoryService } from '../category.service';
 
 @Injectable()
 export class QuoteEffects {
-  constructor(private actions$: Actions, private quoteService: QuoteService) {
+  constructor(private actions$: Actions, private quoteService: QuoteService, private categoryService: CategoryService) {
   }
 
-  config$ = createEffect(() => {
+  getQuotes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getQuotes),
       switchMap(() => {
         return this.quoteService.getAll().pipe(
           map(quotes => getQuotesSuccess({quotes})),
           catchError(error => of(getQuotesFailure({error})))
+        );
+      })
+    );
+  });
+
+  getCategories$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(getCategories),
+      switchMap(() => {
+        return this.categoryService.getAll().pipe(
+          map(categories => getCategoriesSuccess({categories})),
+          catchError(error => of(getCategoriesFailure({error})))
         );
       })
     );

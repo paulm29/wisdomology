@@ -3,7 +3,7 @@ import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import {
   addQuoteFailure,
   addQuoteSuccess,
-  editQuoteFailure, editQuoteSuccess,
+  editQuoteFailure, editQuoteSuccess, getCategoriesFailure, getCategoriesSuccess,
   getQuotesFailure,
   getQuotesSuccess
 } from './quote.actions';
@@ -31,6 +31,13 @@ export const quoteReducers: ActionReducer<QuoteState> = createReducer(
     quotes: [...state.quotes.filter(q => q.id = action.quote.id), action.quote]
   })),
   on(editQuoteFailure, (state, action) => ({
+    ...state
+  })),
+  on(getCategoriesSuccess, (state, action) => ({
+    ...state,
+    categories: action.categories
+  })),
+  on(getCategoriesFailure, (state, action) => ({
     ...state
   })),
 );

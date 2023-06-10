@@ -20,9 +20,15 @@ import { StoreModule } from '@ngrx/store';
 import { quoteFeature, quoteReducers } from './store/quote.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { quoteEffects } from './store/quote.effects';
+import { QuoteAddComponent } from './quote-add/quote-add.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+    QuoteAddComponent,
     QuoteViewComponent,
     QuoteEditComponent,
     QuoteListComponent,
@@ -31,6 +37,7 @@ import { quoteEffects } from './store/quote.effects';
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -42,6 +49,9 @@ import { quoteEffects } from './store/quote.effects';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
     StoreModule.forFeature(quoteFeature, quoteReducers),
     EffectsModule.forFeature(quoteEffects)
   ],
