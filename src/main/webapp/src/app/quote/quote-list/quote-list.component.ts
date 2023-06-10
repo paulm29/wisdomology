@@ -12,7 +12,7 @@ import { getQuotes } from '../store/quote.actions';
 @Component({
   selector: 'app-quote-list',
   templateUrl: './quote-list.component.html',
-  styleUrls: ['./quote-list.component.css']
+  styleUrls: ['./quote-list.component.scss']
 })
 export class QuoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

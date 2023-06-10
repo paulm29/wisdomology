@@ -8,7 +8,7 @@ import { selectQuotes } from './store/quote.selectors';
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
-  styleUrls: ['./quote.component.css']
+  styleUrls: ['./quote.component.scss']
 })
 export class QuoteComponent implements OnInit {
   quotes: Quote[] = [];

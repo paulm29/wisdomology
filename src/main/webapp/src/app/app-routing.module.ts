@@ -1,16 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { inject, NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { QuoteModule } from './quote/quote.module';
 import { QuoteViewComponent } from './quote/quote-view/quote-view.component';
 import { QuoteEditComponent } from './quote/quote-edit/quote-edit.component';
 import { QuoteAddComponent } from './quote/quote-add/quote-add.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth-guard.service';
+import { ErrorPageComponent } from './error/error-page.component';
+import { UserResolver } from './common/user-resolver.service';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'quotes/:quoteId', component: QuoteViewComponent},
-  {path: 'quotes/:quoteId/edit', component: QuoteEditComponent},
-  {path: 'quotes/add', component: QuoteAddComponent}
+  {path: '', component: DashboardComponent, resolve: {'user': () => inject(UserResolver).resolve()}},
+  {path: 'quotes/:quoteId/view', component: QuoteViewComponent, canActivate: [() => inject(AuthGuard).canActivate()],},
+  {
+    path: 'quotes/:quoteId/edit',
+    component: QuoteEditComponent,
+    canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AuthGuard).canActivate(next, state)]
+  },
+  {path: 'quotes/add', component: QuoteAddComponent},
+  {path: 'error', component: ErrorPageComponent, data: { message: "An error occurred"} },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

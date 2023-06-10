@@ -22,23 +22,23 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu'
-import { metaReducers, appReducers } from './common/store/reducers/app.reducer';
-import { RouterModule } from '@angular/router';
+import { appReducers, metaReducers } from './common/store/reducers/app.reducer';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './common/interceptor/auth.interceptor';
+import { ErrorPageComponent } from './error/error-page.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavigationComponent,
     AppComponent,
-    HighlightDirective
+    HighlightDirective,
+    ErrorPageComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
