@@ -7,10 +7,10 @@ import { QuoteAddComponent } from './quote/quote-add/quote-add.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth-guard.service';
 import { ErrorPageComponent } from './error/error-page.component';
-import { UserResolver } from './common/user-resolver.service';
+import { UserResolver } from './user-resolver.service';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent, resolve: {'user': () => inject(UserResolver).resolve()}},
+  {path: '', component: DashboardComponent, resolve: { user: () => UserResolver}},
   {path: 'quotes/:quoteId/view', component: QuoteViewComponent, canActivate: [() => inject(AuthGuard).canActivate()],},
   {
     path: 'quotes/:quoteId/edit',
@@ -18,7 +18,7 @@ const routes: Routes = [
     canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AuthGuard).canActivate(next, state)]
   },
   {path: 'quotes/add', component: QuoteAddComponent},
-  {path: 'error', component: ErrorPageComponent, data: { message: "An error occurred"} },
+  {path: 'error', component: ErrorPageComponent, data: {message: "An error occurred"}},
   {path: '**', redirectTo: ''}
 ];
 
