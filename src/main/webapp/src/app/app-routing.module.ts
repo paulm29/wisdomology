@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth-guard.service';
 import { ErrorPageComponent } from './error/error-page.component';
 import { UserResolver } from './user-resolver.service';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, resolve: { user: () => UserResolver}},
@@ -19,7 +20,8 @@ const routes: Routes = [
   },
   {path: 'quotes/add', component: QuoteAddComponent},
   {path: 'error', component: ErrorPageComponent, data: {message: "An error occurred"}},
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: ''},
+  {path: 'auth', component: AuthComponent},
 ];
 
 @NgModule({

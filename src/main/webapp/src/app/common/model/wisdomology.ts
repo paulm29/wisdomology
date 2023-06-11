@@ -18,11 +18,11 @@ export interface Quote {
     id: string;
     quote: string;
     sourceText: SourceText | null;
-    quoteComment: QuoteComment[];
+    comment: Comment[];
     categories: Category[];
 }
 
-export interface QuoteComment {
+export interface Comment {
     id: string;
     quoteId: string;
     comment: string;

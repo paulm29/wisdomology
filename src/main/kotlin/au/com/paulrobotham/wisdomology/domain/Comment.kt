@@ -6,10 +6,9 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.util.UUID
 
-// TODO rename to comment
 @Table(schema = "wisdomology", name = "quote_comment")
 @Entity
-class QuoteComment(
+class Comment(
     @Id
     val id: UUID,
 

@@ -16,6 +16,16 @@
             <column name="last_name" type="VARCHAR"/>
         </createTable>
 
+        <createTable schemaName="wisdomology" tableName="category_reference">
+            <column name="id" type="uuid">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pk_category_reference"
+                />
+            </column>
+            <column name="category" type="VARCHAR"/>
+        </createTable>
+
         <createTable schemaName="wisdomology" tableName="category">
             <column name="id" type="uuid">
                 <constraints nullable="false"
@@ -23,10 +33,18 @@
                              primaryKeyName="pk_category"
                 />
             </column>
-            <column name="category" type="VARCHAR"/>
+            <column name="category_id" type="uuid"/>  <!-- TODO FK -->
 
             <column name="quote_id" type="uuid"/> <!-- TODO FK -->
         </createTable>
+
+<!--        <addForeignKeyConstraint constraintName="fk_source_link__source_text"-->
+<!--                                 baseTableSchemaName="wisdomology"-->
+<!--                                 baseTableName="source_link"-->
+<!--                                 baseColumnNames="source_text_id"-->
+<!--                                 referencedTableSchemaName="wisdomology"-->
+<!--                                 referencedTableName="source_text"-->
+<!--                                 referencedColumnNames="id" />-->
 
         <createTable schemaName="wisdomology" tableName="quote">
             <column name="id" type="uuid">
@@ -40,6 +58,14 @@
             <column name="source_text_id" type="uuid"/>
         </createTable>
 
+<!--        <addForeignKeyConstraint constraintName="fk_source_link__source_text"-->
+<!--                                 baseTableSchemaName="wisdomology"-->
+<!--                                 baseTableName="source_link"-->
+<!--                                 baseColumnNames="source_text_id"-->
+<!--                                 referencedTableSchemaName="wisdomology"-->
+<!--                                 referencedTableName="source_text"-->
+<!--                                 referencedColumnNames="id" />-->
+
         <createTable schemaName="wisdomology" tableName="quote_comment">
             <column name="id" type="uuid">
                 <constraints nullable="false"
@@ -51,6 +77,14 @@
 
             <column name="quote_id" type="uuid"/> <!-- TODO FK -->
         </createTable>
+
+<!--        <addForeignKeyConstraint constraintName="fk_source_link__source_text"-->
+<!--                                 baseTableSchemaName="wisdomology"-->
+<!--                                 baseTableName="source_link"-->
+<!--                                 baseColumnNames="source_text_id"-->
+<!--                                 referencedTableSchemaName="wisdomology"-->
+<!--                                 referencedTableName="source_text"-->
+<!--                                 referencedColumnNames="id" />-->
 
         <createTable schemaName="wisdomology" tableName="source_link">
             <column name="id" type="uuid">
@@ -95,6 +129,14 @@
                                  referencedTableSchemaName="wisdomology"
                                  referencedTableName="source_text"
                                  referencedColumnNames="id" />
+
+<!--        CREATE TABLE IF NOT EXISTS user_role (-->
+<!--        user_role_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,-->
+<!--        profile_id BIGINT,-->
+<!--        role VARCHAR(255),-->
+<!--        version BIGINT NOT NULL DEFAULT 0,-->
+<!--        PRIMARY KEY (user_role_id)-->
+<!--        );-->
 
     </changeSet>
 </databaseChangeLog>

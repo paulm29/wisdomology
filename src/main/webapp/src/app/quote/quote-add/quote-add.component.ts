@@ -46,6 +46,10 @@ export class QuoteAddComponent implements OnInit, OnDestroy {
     this.store.dispatch(addQuote({quote}));
   }
 
+  onReset() : void {
+    this.quoteForm.reset();
+  }
+
   ngOnDestroy(): void {
     this.isComponentAlive = false;
   }

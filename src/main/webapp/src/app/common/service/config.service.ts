@@ -10,7 +10,7 @@ export class ConfigService {
   constructor(private http: HttpClient) {
   }
 
-  configUrl = environment.baseUrl + '/api/config';
+  configUrl = environment.baseUrl + '/config';
 
   getConfig() {
     return this.http.get<string>(this.configUrl)

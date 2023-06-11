@@ -6,8 +6,12 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['']">All quotes</a>
-      <a mat-list-item [routerLink]="['quotes/add']">Add quote</a>
-      <a mat-list-item [routerLink]="['quotes/popular']">Popular</a>
+      <a mat-list-item [routerLink]="['/quotes/add']">Add quote</a>
+      <a mat-list-item [routerLink]="['/quotes/popular']">Popular</a>
+    </mat-nav-list>
+    <mat-toolbar>Admin</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/admin/categories']">Categories</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

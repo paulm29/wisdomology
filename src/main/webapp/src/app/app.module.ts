@@ -26,6 +26,9 @@ import { appReducers, metaReducers } from './common/store/reducers/app.reducer';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './common/interceptor/auth.interceptor';
 import { ErrorPageComponent } from './error/error-page.component';
+import { AdminComponent } from './admin/admin.component';
+import { AssessorFormatPipe } from './common/pipes/assessor-format.pipe';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { ErrorPageComponent } from './error/error-page.component';
     NavigationComponent,
     AppComponent,
     HighlightDirective,
-    ErrorPageComponent
+    ErrorPageComponent,
+    AdminComponent,
+    AssessorFormatPipe,
+    AuthComponent
   ],
   imports: [
     CommonModule,

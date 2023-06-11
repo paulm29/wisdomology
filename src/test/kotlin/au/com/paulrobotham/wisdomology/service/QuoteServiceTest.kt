@@ -23,7 +23,7 @@ fun quote(): Quote {
         id = UUID.randomUUID(),
         quote = "a",
         sourceText = null,
-        quoteComment = mutableListOf(),
+        comment = mutableListOf(),
         categories = mutableListOf()
     )
 }

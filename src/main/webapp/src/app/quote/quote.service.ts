@@ -16,6 +16,10 @@ export class QuoteService {
     return this.http.get<Quote[]>(this.url);
   }
 
+  addQuote(quote: Quote) {
+    return this.http.post<Quote>(`this.url`, quote);
+  }
+
   // TODO don't need?
   get(id: string) {
     return this.http.get<Quote>(`this.url/${id}`);

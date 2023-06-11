@@ -5,6 +5,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.PrimaryKeyJoinColumn
@@ -25,9 +26,11 @@ class Quote(
     @PrimaryKeyJoinColumn(name = "source_text_id")
     var sourceText: SourceText?,
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "quoteId", fetch = FetchType.EAGER, orphanRemoval = true)
-    var quoteComment: MutableList<QuoteComment> = mutableListOf(),
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "quote_id")
+    var comment: MutableList<Comment> = mutableListOf(),
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "quoteId", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "quote_id")
     var categories: MutableList<Category> = mutableListOf(),
 )
