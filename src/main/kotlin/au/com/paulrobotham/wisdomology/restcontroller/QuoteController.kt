@@ -2,7 +2,12 @@ package au.com.paulrobotham.wisdomology.restcontroller
 
 import au.com.paulrobotham.wisdomology.domain.Quote
 import au.com.paulrobotham.wisdomology.service.QuoteService
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
+import com.opencsv.CSVWriter
+import com.opencsv.bean.StatefulBeanToCsv
+import com.opencsv.bean.StatefulBeanToCsvBuilder
+import jakarta.servlet.http.HttpServletResponse
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpHeaders.CONTENT_DISPOSITION
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -45,5 +50,28 @@ class QuoteController(private val quoteService: QuoteService) {
     @DeleteMapping("/{id}")
     fun deleteQuote(id: String) {
         return quoteService.delete(id);
+    }
+
+    @GetMapping("/export")
+    @Throws(Exception::class)
+    fun exportCSV(response: HttpServletResponse) {
+
+        //set file name and content type
+        val filename = "quotes.csv"
+        response.setContentType("text/csv")
+        response.setHeader(
+            CONTENT_DISPOSITION,
+            "attachment; filename=\"$filename\""
+        )
+
+        //create a csv writer
+        val writer: StatefulBeanToCsv<Quote> = StatefulBeanToCsvBuilder<Quote>(response.getWriter())
+            .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+            .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+            .withOrderedResults(false)
+            .build()
+
+        //write all users to csv file
+        writer.write(quoteService.findAll())
     }
 }

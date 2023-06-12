@@ -1,8 +1,8 @@
-import { Category, Quote } from '../../common/model/wisdomology';
+import { CategoryReference, Quote } from '../../common/model/wisdomology';
 
 export interface QuoteState {
   quotes: Quote[];
-  categories: Category[];
+  categories: CategoryReference[];
 }
 
 export const initialQuoteState: QuoteState = {

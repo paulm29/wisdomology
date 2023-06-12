@@ -3,19 +3,24 @@
 // Generated using typescript-generator version 3.2.1263 on 2023-06-03 12:08:01.
 
 export interface Author {
-    id: string;
+    id?: string;
     firstName: string | null;
     lastName: string;
 }
 
+export interface CategoryReference {
+  id?: string;
+  category: string;
+}
+
 export interface Category {
-    id: string;
+    id?: string;
     quoteId: string;
-    category: string;
+    category: CategoryReference;
 }
 
 export interface Quote {
-    id: string;
+    id?: string;
     quote: string;
     sourceText: SourceText | null;
     comment: Comment[];
@@ -23,19 +28,19 @@ export interface Quote {
 }
 
 export interface Comment {
-    id: string;
+    id?: string;
     quoteId: string;
     comment: string;
 }
 
 export interface SourceLink {
-    id: string;
+    id?: string;
     sourceTextId: string;
     url: string;
 }
 
 export interface SourceText {
-    id: string;
+    id?: string;
     author: Author | null;
     title: string;
     translation: Translation | null;
@@ -43,7 +48,7 @@ export interface SourceText {
 }
 
 export interface Translation {
-    id: string;
+    id?: string;
     firstName: string | null;
     lastName: string;
 }

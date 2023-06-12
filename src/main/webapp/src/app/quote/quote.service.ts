@@ -17,19 +17,19 @@ export class QuoteService {
   }
 
   addQuote(quote: Quote) {
-    return this.http.post<Quote>(`this.url`, quote);
+    return this.http.post<Quote>(this.url, quote);
   }
 
   // TODO don't need?
   get(id: string) {
-    return this.http.get<Quote>(`this.url/${id}`);
+    return this.http.get<Quote>(`${this.url}/${id}`);
   }
 
   update(id: string, quote: Quote) {
-    return this.http.put<Quote>(`this.url/${id}`, quote);
+    return this.http.put<Quote>(`${this.url}/${id}`, quote);
   }
 
   delete(id: string) {
-    return this.http.delete<Quote>(`this.url/${id}`);
+    return this.http.delete<Quote>(`${this.url}/${id}`);
   }
 }

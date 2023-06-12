@@ -51,6 +51,8 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.hibernate.validator:hibernate-validator")
 
+    implementation("com.opencsv:opencsv:4.5")
+
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")

@@ -3,7 +3,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { selectQuotes } from '../store/quote.selectors';
 import { takeWhile } from 'rxjs';
-import { Category, Quote } from '../../common/model/wisdomology';
+import { Category, CategoryReference, Comment, Quote, SourceText } from '../../common/model/wisdomology';
 import { Store } from '@ngrx/store';
 import { addQuote, getCategories } from '../store/quote.actions';
 
@@ -15,7 +15,7 @@ import { addQuote, getCategories } from '../store/quote.actions';
 })
 export class QuoteAddComponent implements OnInit, OnDestroy {
   isComponentAlive: boolean = true;
-  categories: Category[] = [];
+  categories: CategoryReference[] = [];
   private fb = inject(FormBuilder);
   quoteForm = this.fb.group({
     quote: [null, Validators.required],
@@ -41,9 +41,17 @@ export class QuoteAddComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    // const quote = this.quoteForm.
-    const quote = {} as Quote;
-    this.store.dispatch(addQuote({quote}));
+    const quote = this.quoteForm.get("quote")?.value || '';
+    const sourceText = this.quoteForm.get("sourceText")?.value || null;
+    const comment = this.quoteForm.get("comments")?.value || [];
+    const categories = this.quoteForm.get("categories")?.value || [];
+    const q = {
+      quote: quote,
+      sourceText: sourceText,
+      comment: comment,
+      categories: categories
+    } as Quote;
+    this.store.dispatch(addQuote({ quote: q}));
   }
 
   onReset() : void {

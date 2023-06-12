@@ -25,21 +25,24 @@ import { MatMenuModule } from '@angular/material/menu'
 import { appReducers, metaReducers } from './common/store/reducers/app.reducer';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './common/interceptor/auth.interceptor';
-import { ErrorPageComponent } from './error/error-page.component';
-import { AdminComponent } from './admin/admin.component';
 import { AssessorFormatPipe } from './common/pipes/assessor-format.pipe';
 import { AuthComponent } from './auth/auth.component';
+import { AdminModule } from './admin/admin.module';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './common/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavigationComponent,
     AppComponent,
-    HighlightDirective,
-    ErrorPageComponent,
-    AdminComponent,
+    AuthComponent,
+    DialogComponent,
     AssessorFormatPipe,
-    AuthComponent
+    HighlightDirective
   ],
   imports: [
     CommonModule,
@@ -50,17 +53,19 @@ import { AuthComponent } from './auth/auth.component';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot(appEffects),
-    MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
+    MatCardModule,
+    MatDialogModule,
+    MatGridListModule,
     MatIconModule,
     MatListModule,
-    MatGridListModule,
-    MatCardModule,
     MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    AdminModule,
     QuoteModule
-    // isDevMode() ? StoreDevtoolsModule.instrument() : [] // FIXME
   ],
   providers: [
     {
@@ -71,7 +76,10 @@ import { AuthComponent } from './auth/auth.component';
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'en-AU'
-    }],
+    },
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

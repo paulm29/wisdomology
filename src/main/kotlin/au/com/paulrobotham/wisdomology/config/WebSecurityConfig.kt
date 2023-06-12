@@ -3,15 +3,9 @@ package au.com.paulrobotham.wisdomology.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
-import org.springframework.security.authorization.AuthorityAuthorizationManager.hasAuthority
-import org.springframework.security.authorization.AuthorityAuthorizationManager.hasRole
-import org.springframework.security.config.Customizer
+import org.springframework.security.config.Customizer.withDefaults
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizationManagerRequestMatcherRegistry
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
-import org.springframework.security.config.web.server.ServerHttpSecurity.http
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
@@ -19,24 +13,35 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
-@Profile(value = ["dev", "prod", "test"])
+//@Profile(value = ["dev", "prod", "test"])
 class WebSecurityConfig {
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
 //        http.csrf().disable()
-        http.authorizeHttpRequests()
-            .requestMatchers("/").permitAll()
-            .requestMatchers("/config").permitAll()
-            .requestMatchers("/quote").permitAll()
-            .anyRequest().permitAll() // TODO
+//        http.authorizeHttpRequests()
+//            .requestMatchers("/api/**").permitAll()
+//            .requestMatchers("/api/**").permitAll()
+////            .requestMatchers("/api/config").permitAll()
+////            .requestMatchers("/api/quote").permitAll()
+////            .requestMatchers("/api/reference/category").permitAll()
+//            .anyRequest().permitAll() // TODO
 //            .formLogin { form: FormLoginConfigurer<HttpSecurity?> ->
 //                form
 //                    .loginPage("/login")
 //                    .permitAll()
 //            }
 //            .logout { logout: LogoutConfigurer<HttpSecurity?> -> logout.permitAll() }
-            return http.build();
+//            return http.build();
+
+        http
+            .authorizeHttpRequests { authorizeHttpRequests ->
+                authorizeHttpRequests
+                    .requestMatchers("/api/**").permitAll()
+                    .requestMatchers("/admin").hasRole("ADMIN")
+            }
+            .formLogin(withDefaults())
+        return http.build()
     }
 
     @Bean

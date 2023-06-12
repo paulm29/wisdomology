@@ -25,8 +25,8 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.jdbc.time_zone: UTC
       hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 400
-      javax.persistence.query.timeout: 10000
-      javax.persistence.lock.timeout: 10000
+      jakarta.persistence.query.timeout: 10000
+      jakarta.persistence.lock.timeout: 10000
     open-in-view: false
   liquibase:
     changeLog: classpath:db/changelog/db.changelog-master.xml
