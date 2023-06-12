@@ -12,7 +12,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
 
 const routes: Routes = [
-  {path: '/', component: DashboardComponent, resolve: { user: () => UserResolver}},
+  {path: 'dashboard', component: DashboardComponent, resolve: {user: () => UserResolver}},
   {path: 'quotes/:quoteId/view', component: QuoteViewComponent, canActivate: [() => inject(AuthGuard).canActivate()],},
   {
     path: 'quotes/:quoteId/edit',
@@ -27,9 +27,9 @@ const routes: Routes = [
   //     });
   // {path: '**', redirectTo: ''},
   {path: 'auth', component: AuthComponent},
-  { path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule) },
-  { path: '', pathMatch: 'full', redirectTo: '/' },
-  { path: '**', redirectTo: 'error' }
+  {path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)},
+  {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
+  {path: '**', redirectTo: 'error'}
 ];
 
 @NgModule({

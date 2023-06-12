@@ -11,7 +11,8 @@
     "test": "npm run test:run",
     "test:run": "jest",
     "precommit": "run-s format:fix link",
-    "format:fix": "pretty-quick --staged"
+    "format:fix": "pretty-quick --staged",
+    "cypress": "npx cypress open --browser firefox"
   },
   "private": true,
   "dependencies": {
