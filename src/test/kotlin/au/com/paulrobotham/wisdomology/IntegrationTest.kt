@@ -30,7 +30,7 @@ class IntegrationTest {
     @LocalServerPort
     var port = 0
 
-    val wireMockServer = WireMockServer(options().port(8080))
+    val wireMockServer = WireMockServer(options().port(8081))
 
     @BeforeAll
     fun beforeAll() {
