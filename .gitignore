@@ -47,4 +47,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 /src/main/webapp/devnpm-cache/
-/app-database/
+app-database/*
+!app-database/init.d

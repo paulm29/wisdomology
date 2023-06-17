@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { QuoteListDataSource, QuoteListItem } from './quote-list-datasource';
+import { QuoteListDataSource } from './quote-list-datasource';
 import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs';
 import { Quote } from '../../common/model/wisdomology';
@@ -21,8 +21,7 @@ export class QuoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: QuoteListDataSource;
   isComponentAlive = true;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['quote', 'category'];
 
   constructor(private store: Store) {
     this.dataSource = new QuoteListDataSource();
@@ -33,15 +32,19 @@ export class QuoteListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.store
       .select(selectQuotes)
       .pipe(takeWhile(() => this.isComponentAlive))
-      .subscribe(quoteState => {
+      .subscribe((quoteState) => {
         this.dataSource.data = quoteState.quotes;
+        this.updateTable();
       });
   }
 
-  ngAfterViewInit(): void {
+  updateTable(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  ngAfterViewInit(): void {
   }
 
   ngOnDestroy() {

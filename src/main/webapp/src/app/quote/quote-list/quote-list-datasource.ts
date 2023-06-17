@@ -5,17 +5,6 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Quote } from '../../common/model/wisdomology';
 
-// TODO: Replace this with your own data model type
-export interface QuoteListItem {
-  name: string;
-  id: number;
-}
-
-/**
- * Data source for the QuoteList view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
 export class QuoteListDataSource extends DataSource<Quote> {
   data: Quote[] = [];
   paginator: MatPaginator | undefined;
@@ -74,8 +63,8 @@ export class QuoteListDataSource extends DataSource<Quote> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        // case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(a.id || '', b.id || '', isAsc);
+        case 'quote': return compare(a.quote, b.quote, isAsc);
+        case 'category': return compare(a.quote, b.quote, isAsc);
         default: return 0;
       }
     });
