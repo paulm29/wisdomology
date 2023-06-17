@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=wisdomology
+      - POSTGRES_PASSWORD=wisdomology
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresdb:/data/postgresdb
+
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    environment:
+      - MONGO_INITDB_DATABASE=wisdomology
+      - MONGODB_INITDB_ROOT_USERNAME=wisdomology
+      - MONGODB_INITDB_ROOT_PASSWORD=wisdomology
+    ports:
+      - "27017:27017"
+    volumes:
+      # if you wish to setup additional user accounts specific per DB or with different roles you can use following entry point
+      #- "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+      - mongodb:/data/db
+      - mongoconfig:/data/configdb
+
+volumes:
+  postgresdb:
+  mongodb:
+  mongoconfig:

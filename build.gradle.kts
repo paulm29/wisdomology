@@ -50,6 +50,7 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.hibernate.validator:hibernate-validator")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
     implementation("com.opencsv:opencsv:4.5")
 

@@ -142,3 +142,9 @@ use wisdomology/wisdomology to connect
 
 * Frontend: http://localhost:4200/
 * Backend: http://localhost:8080/
+
+# Mongodb
+```
+docker pull mongodb/mongodb-community-server
+docker run --name mongo -e MONGO_INITDB_DATABASE=wisdomology -e MONGODB_INITDB_ROOT_USERNAME=wisdomology -e MONGODB_INITDB_ROOT_PASSWORD=wisdomology -d mongodb/mongodb-community-server:latest 
+```

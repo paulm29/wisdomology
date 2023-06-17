@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Category, CategoryReference, Quote } from '../../common/model/wisdomology';
+import { CategoryReference, Quote } from '../../common/model/wisdomology';
 
 export const getQuotes = createAction('[Quotes] Get Quotes');
 export const getQuotesSuccess = createAction('[Quotes] Get Quotes Success', props<{ quotes: Quote[] }>());
