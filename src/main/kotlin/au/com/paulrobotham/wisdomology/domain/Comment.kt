@@ -2,6 +2,8 @@ package au.com.paulrobotham.wisdomology.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.util.UUID
@@ -10,10 +12,11 @@ import java.util.UUID
 @Entity
 class Comment(
     @Id
-    val id: UUID,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    var id: UUID?,
 
     @Column(name = "quote_id", nullable = false)
-    val quoteId: UUID,
+    var quoteId: UUID?,
 
     @Column(name = "comment", nullable = false)
     val comment: String,

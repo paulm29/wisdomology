@@ -10,26 +10,26 @@ export interface Author {
 
 export interface CategoryReference {
   id?: string;
-  category: string;
+  category?: string;
 }
 
 export interface Category {
     id?: string;
-    quoteId: string;
-    category: CategoryReference;
+    quoteId?: string;
+    category?: CategoryReference;
 }
 
 export interface Quote {
     id?: string;
     quote: string;
     sourceText: SourceText | null;
-    comment: Comment[];
+    comments: Comment[];
     categories: Category[];
 }
 
 export interface Comment {
     id?: string;
-    quoteId: string;
+    quoteId?: string;
     comment: string;
 }
 

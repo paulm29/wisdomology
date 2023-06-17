@@ -18,7 +18,7 @@ class WebSecurityConfig {
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-//        http.csrf().disable()
+        http.csrf { csrf -> csrf.disable() }
 //        http.authorizeHttpRequests()
 //            .requestMatchers("/api/**").permitAll()
 //            .requestMatchers("/api/**").permitAll()

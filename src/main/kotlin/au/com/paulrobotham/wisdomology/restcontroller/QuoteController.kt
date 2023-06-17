@@ -29,10 +29,9 @@ class QuoteController(private val quoteService: QuoteService) {
         return quoteService.findAll()
     }
 
-    @PostMapping()
+    @PostMapping
     fun getQuote(@RequestBody quote: Quote): Quote? {
         // TODO throw error if it already has an ID
-        quote.id = UUID.randomUUID()
         return quoteService.create(quote)
     }
 

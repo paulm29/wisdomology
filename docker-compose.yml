@@ -13,20 +13,18 @@ services:
       - postgresdb:/data/postgresdb
 
   mongodb:
-    image: mongodb/mongodb-community-server:latest
+    image: mongo:6.0.5
     environment:
       - MONGO_INITDB_DATABASE=wisdomology
       - MONGODB_INITDB_ROOT_USERNAME=wisdomology
       - MONGODB_INITDB_ROOT_PASSWORD=wisdomology
     ports:
       - "27017:27017"
+#    restart: always # causes issues?
     volumes:
-      # if you wish to setup additional user accounts specific per DB or with different roles you can use following entry point
-      #- "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
-      - mongodb:/data/db
-      - mongoconfig:/data/configdb
+      - ./app-database/data/db:/data/db
+      - ./app-database/data/log:/var/log/mongodb
+      - ./app-database/init.d:/docker-entrypoint-initdb.d
 
 volumes:
   postgresdb:
-  mongodb:
-  mongoconfig:

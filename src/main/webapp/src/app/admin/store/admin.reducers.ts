@@ -22,7 +22,7 @@ export const adminReducers: ActionReducer<AdminState> = createReducer(
   })),
   on(addCategoryReferenceSuccess, (state, action) => ({
     ...state,
-    quotes: [...state.categoryReferences, action.categoryReference]
+    categoryReferences: [...state.categoryReferences, action.categoryReference]
   })),
   on(addCategoryReferenceFailure, (state, action) => ({
     ...state

@@ -53,6 +53,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
     implementation("com.opencsv:opencsv:4.5")
+    implementation("org.zalando:problem-spring-web:0.23.0")
 
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -119,7 +120,7 @@ tasks.create<Delete>("deleteAngularBuild") {
 }
 
 tasks.processResources {
-    dependsOn(":buildAngular")
+    //dependsOn(":buildAngular")
 }
 
 task<Exec>("installAngular") {

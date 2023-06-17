@@ -17,7 +17,7 @@ spring:
       username: wisdomology
       password: wisdomology
       database: wisdomology
-      authentication-database: admin
+      authentication-database: wisdomology
   jpa:
     hibernate:
       ddl-auto: none
@@ -41,4 +41,4 @@ spring:
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    enabled: true
+    enabled: false

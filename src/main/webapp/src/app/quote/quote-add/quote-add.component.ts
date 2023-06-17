@@ -15,7 +15,7 @@ import { addQuote, getCategories } from '../store/quote.actions';
 })
 export class QuoteAddComponent implements OnInit, OnDestroy {
   isComponentAlive: boolean = true;
-  categories: CategoryReference[] = [];
+  categoryReferences: CategoryReference[] = [];
   private fb = inject(FormBuilder);
   quoteForm = this.fb.group({
     quote: [null, Validators.required],
@@ -36,20 +36,20 @@ export class QuoteAddComponent implements OnInit, OnDestroy {
       .select(selectQuotes)
       .pipe(takeWhile(() => this.isComponentAlive))
       .subscribe(quoteState => {
-        this.categories = quoteState.categories;
+        this.categoryReferences = quoteState.categories;
       });
   }
 
   onSubmit(): void {
     const quote = this.quoteForm.get("quote")?.value || '';
     const sourceText = this.quoteForm.get("sourceText")?.value || null;
-    const comment = this.quoteForm.get("comments")?.value || [];
-    const categories = this.quoteForm.get("categories")?.value || [];
+    const comment = this.quoteForm.get("comment")?.value || '';
+    const categoryReferenceId = this.quoteForm.get("category")?.value || '';
     const q = {
       quote: quote,
       sourceText: sourceText,
-      comment: comment,
-      categories: categories
+      comments: comment ? [{comment}]: [],
+      categories: categoryReferenceId ? [{category: {id: categoryReferenceId}}]: []
     } as Quote;
     this.store.dispatch(addQuote({ quote: q}));
   }

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { QuoteService } from '../quote.service';
 import {
-  addQuote, addQuoteFailure, addQuoteSuccess,
+  addQuote,
+  addQuoteFailure,
+  addQuoteSuccess,
   getCategories,
   getCategoriesFailure,
   getCategoriesSuccess,

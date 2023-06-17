@@ -18,8 +18,8 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-select placeholder="Category" formControlName="category">
-              <mat-option *ngFor="let category of categories" [value]="category">
-                {{ category }}
+              <mat-option *ngFor="let catref of categoryReferences" [value]="catref.id">
+                {{ catref.category }}
               </mat-option>
             </mat-select>
           </mat-form-field>

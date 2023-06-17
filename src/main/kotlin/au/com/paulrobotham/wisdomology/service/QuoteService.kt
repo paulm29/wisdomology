@@ -22,10 +22,10 @@ class QuoteService (private val quoteRepository: QuoteRepository) {
     }
 
     fun create(quote: Quote): Quote? {
-        quote.id = UUID.randomUUID()
+        val created = quoteRepository.save(quote)
         LOGGER.info("Created: $quote")
 
-        return quoteRepository.save(quote)
+        return created
     }
 
     fun update(quote: Quote): Quote? {

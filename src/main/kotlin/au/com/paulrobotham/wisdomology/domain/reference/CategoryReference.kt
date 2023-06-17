@@ -10,8 +10,8 @@ import java.util.*
 @Entity
 class CategoryReference(
     @Id
-    var id: UUID,
+    var id: UUID?,
 
     @Column(name = "category", nullable = false)
-    val category: String,
+    val category: String?,
 )
