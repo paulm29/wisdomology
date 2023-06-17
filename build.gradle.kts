@@ -63,7 +63,7 @@ dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk:0.26.1")
     implementation("io.mockk:mockk:1.13.5")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
-    testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
+    testImplementation("com.github.tomakehurst:wiremock:3.0.0-beta-10")
     testImplementation("org.springframework.graphql:spring-graphql-test")
 }
 
