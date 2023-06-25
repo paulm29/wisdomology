@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { QuoteListDataSource } from './quote-list-datasource';
 import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs';
 import { Quote } from '../../common/model/wisdomology';
 import { selectQuotes } from '../store/quote.selectors';
 import { getQuotes } from '../store/quote.actions';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-quote-list',
@@ -18,13 +18,14 @@ export class QuoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Quote>;
-  dataSource: QuoteListDataSource;
+  dataSource: MatTableDataSource<Quote>;
   isComponentAlive = true;
 
-  displayedColumns = ['quote', 'category'];
+  displayedColumns = ['quote', 'category', 'actions'];
+  selection = new SelectionModel<Quote>(false, []);
 
   constructor(private store: Store) {
-    this.dataSource = new QuoteListDataSource();
+    this.dataSource = new MatTableDataSource<Quote>([]);
   }
 
   ngOnInit() {
@@ -41,7 +42,27 @@ export class QuoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   updateTable(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  }
+
+  applyFilter(event: Event) {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   ngAfterViewInit(): void {

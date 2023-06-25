@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
+    MatCheckboxModule,
     StoreModule.forFeature(quoteFeature, quoteReducers),
     EffectsModule.forFeature(quoteEffects)
   ],

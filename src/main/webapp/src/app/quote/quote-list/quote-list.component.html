@@ -1,5 +1,10 @@
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
 
     <ng-container matColumnDef="quote">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Quote</th>
@@ -9,6 +14,32 @@
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
       <td mat-cell *matCellDef="let quote">{{quote.categories[0].category.category}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon>open_in_new</mat-icon>
+        <mat-icon>edit</mat-icon>
+<!--        <mat-icon>favorite</mat-icon>-->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
